@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    ..... > > > > > WELCOME TO CUSTOMER PAGE! < < < < < .....
+    <br>
+    <form action="#" th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout">
+    </form>
+    <h5>______________________________________________________</h5>
+    <h2>Product List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">Id</td>
+            <td th:text="${product.productName}">Product Name</td>
+            <td th:text="${product.price}">0.00</td>
+            <td th:text="${product.category}">Category</td>
+            <td th:text="${product.quantity}">Quantity</td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/product/getAllByCategory}" method="get">
+        <label for="categoryToShow">Category:</label>
+        <input type="text" id="categoryToShow" name="categoryToShow" />
+        <button type="submit">Show products by category</button>
+    </form>
+    <a th:href="@{/product/getAll}" class="button">Show all products</a>
+
+    <h5>______________________________________________________</h5>
+    <h2>Order List</h2>
+    <form th:action="@{/order/add}" method="post">
+        <label for="productId">Product Id:</label>
+        <input type="text" id="productId" name="productId" />
+        <button type="submit">Insert Order</button>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Product Id</th>
+            <th>Date and Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">Order ID</td>
+            <td th:text="${order.product.id}">Product Id</td>
+            <td th:text="${order.dateAndTime}">Date and Time</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

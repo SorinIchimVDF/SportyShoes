@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+..... > > > > > WELCOME TO ADMIN PAGE! < < < < < .....
+<br>
+<form action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout">
+</form>
+<h5>______________________________________________________</h5>
+<h2>Product List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">Id</td>
+        <td th:text="${product.productName}">Product Name</td>
+        <td th:text="${product.price}">0.00</td>
+        <td th:text="${product.category}">Category</td>
+        <td th:text="${product.quantity}">Quantity</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/product/getAllByCategoryCustomer}" method="get">
+    <label for="categoryToShow">Category:</label>
+    <input type="text" id="categoryToShow" name="categoryToShow"/>
+    <button type="submit">Show products by category</button>
+</form>
+<a th:href="@{/product/getAllAdminPage}" class="button">Show all products</a>
+<br>
+
+<br>
+<h5>______________________________________________________</h5>
+<h2>ADD Product</h2>
+<form th:action="@{/product/add}" method="post">
+    <div class="form-group">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName"/>
+    </div>
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price"/>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity"/>
+    </div>
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category"/>
+    </div>
+    <button type="submit">Add Product</button>
+</form>
+<br>
+
+<h5>______________________________________________________</h5>
+<h2>DELETE Product</h2>
+<form th:action="@{/product/delete}" method="post">
+    <label for="productId">Product Id:</label>
+    <input type="text" id="productId" name="productId"/>
+    <button type="submit">Delete Product</button>
+</form>
+
+<h5>______________________________________________________</h5>
+<h2>ORDERS List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Product Id</th>
+        <th>Date and Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}">Order Id</td>
+        <td th:text="${order.product.id}">Product Name</td>
+        <td th:text="${order.dateAndTime}">Date and Time</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<h5>______________________________________________________</h5>
+<h2>USERS List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Roles</th>
+        <th>Enabled</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">Id</td>
+        <td th:text="${user.username}">Username</td>
+        <td th:text="${user.role}">Roles</td>
+        <td th:text="${user.enabled}">Enabled</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
